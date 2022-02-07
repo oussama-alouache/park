@@ -1,7 +1,6 @@
 import React ,{ Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
- 
  class Adduser extends Component{
  state ={
      username :'',
@@ -10,20 +9,31 @@ import axios from 'axios';
      date:'',
 
  }
- handleInpu=(e) =>{
+ handleInput=(e) =>{
      this.setState({
-         [e.traget.username] : e.target.username,
-         [e.traget.passw] : e.target.passw,
-         [e.traget.mail] : e.target.mail,
-         [e.traget.date] : e.target.date
+        [e.target.name]: e.target.value,
+    
 
 
 
      });
  }
  saveuser =(e) =>{
-     e.preevntDefault();
-     const res = await axios.post ("/api/add-user",this.state);
+    e.preventDefault();
+
+   const res =  axios.post("http://127.0.0.1:8000/api/add-user",this.state);
+     if(res.data.status === 200)
+     { 
+         console.log (res.data.message);
+    
+         this.setState({
+            username :'',
+            passw :'',
+            mail:'',
+            date:'',
+         });
+
+        }
  }
 
      render()
@@ -43,27 +53,27 @@ import axios from 'axios';
                              <form onSubmit={this.saveuser }>
                                     <div className='form-group mb-3'>
                                         <label> user name </label>
-                                        <input type="text"  name='username'  onChange={this.handleInput} value={this.state.username} className='form-control'/>
+                                        <input type="text"  name='username'onChange={this.handleInput} value={this.state.username} className='form-control'/>
 
                                     </div>
                                     <div className='form-group mb-3'>
-                                        <label> user name </label>
-                                        <input type="text"  name='passew'  onChange={this.handleInput} value={this.state.passw} className='form-control'/>
+                                        <label>passe word</label>
+                                        <input type="text"  name='passew' onChange={this.handleInput} value={this.state.passw} className='form-control'/>
 
                                     </div>
                                     <div className='form-group mb-3'>
-                                        <label> user name </label>
-                                        <input type="text"   name='mail' onChange={this.handleInput} value={this.state.mail}  className='form-control'/>
+                                        <label> mail </label>
+                                        <input type="text"   name='mail'onChange={this.handleInput} value={this.state.mail}  className='form-control'/>
 
                                     </div>
                                     <div className='form-group mb-3'>
-                                        <label> user name </label>
-                                        <input type="text"  name='date'onChange={this.handleInput} value={this.state.date} className='form-control'/>
+                                        <label> date </label>
+                                        <input type="date"  name='date'onChange={this.handleInput} value={this.state.date} className='form-control'/>
 
                                     </div>
                                     <div className='form-group mb-3'>
                                     
-                                    <button type="submit" class="btn btn-primary">save</button>
+                                    <button type="submit"  className="btn btn-primary">save</button>
                                     </div>
                              </form>
 
@@ -81,4 +91,4 @@ import axios from 'axios';
      }
 
  }
- export default Adduser
+ export default Adduser;
