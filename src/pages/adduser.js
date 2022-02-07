@@ -22,7 +22,7 @@ import axios from 'axios';
     e.preventDefault();
 
    const res =  axios.post("http://127.0.0.1:8000/api/add-user",this.state);
-     if(res.data.status === 200)
+     if(res.status === 200)
      { 
          console.log (res.data.message);
     
