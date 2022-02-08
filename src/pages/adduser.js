@@ -1,11 +1,10 @@
 import React ,{ Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Message, toaster } from 'rsuite';
+
 
 // or
-import Message from 'rsuite/Message';
-import toaster from 'rsuite/toaster';
+
  class Adduser extends Component{
  state ={
      username :'',
