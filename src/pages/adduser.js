@@ -1,6 +1,11 @@
 import React ,{ Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Message, toaster } from 'rsuite';
+
+// or
+import Message from 'rsuite/Message';
+import toaster from 'rsuite/toaster';
  class Adduser extends Component{
  state ={
      username :'',
@@ -18,10 +23,10 @@ import axios from 'axios';
 
      });
  }
- saveuser =(e) =>{
-    e.preventDefault();
+     saveuser = async(e) =>{
+   e.preventDefault();
 
-   const res =  axios.post("http://127.0.0.1:8000/api/add-user",this.state);
+   const res = await axios.post("http://127.0.0.1:8000/api/add-user",this.state);
      if(res.data.status === 200)
      { 
          console.log (res.data.message);
