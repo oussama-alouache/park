@@ -31,7 +31,7 @@ class User extends Component {
             <td>{item.id}</td>
             <td>{item.username}</td>
             <td>{item.passew}</td>
-            <td>{item.email}</td>
+            <td>{item.mail}</td>
             <td>{item.date}</td>
             <td>
               <Link
