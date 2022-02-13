@@ -18,6 +18,19 @@ class User extends Component {
       });
     }
   }
+  deleteuser= async  ( e , id)=>{
+    const deletedata= e.currentTarget;
+
+    const res= await  axios.delete(`http://127.0.0.1:8000/api/delete-user/${id}`)
+    if (res.data.status === 200) {
+      deletedata.closest("tr").remove();
+      
+        console.log(res.data.message);
+
+        
+    
+    }
+  } 
   render() {
   var student_HTMLTABLE =[]
 
@@ -42,7 +55,7 @@ class User extends Component {
               </Link>
             </td>
             <td>
-              <button type="button" className="btn btn-danger btn-sm">
+              <button type="button" onClick={(e)=> this.deleteuser(e,item.id)}  className="btn btn-danger btn-sm">
                 Delete
               </button>
             </td>

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 // or
 
 class Adduser extends Component {
   state = {
     username: "",
-    passw: "",
+    passew: "",
     mail: "",
     date: "",
   };
@@ -24,11 +25,16 @@ class Adduser extends Component {
       this.state
     );
     if (res.data.status === 200) {
-      console.log(res.data.message);
-
+     // console.log(res.data.message);
+     Swal.fire({
+      icon: 'success',
+      title: res.data.message,
+      confirmButtonText: 'نعم',
+    
+    })
       this.setState({
         username: "",
-        passw: "",
+        passew: "",
         mail: "",
         date: "",
       });
@@ -72,7 +78,7 @@ class Adduser extends Component {
                       type="text"
                       name="passew"
                       onChange={this.handleInput}
-                      value={this.state.passw}
+                      value={this.state.passew}
                       className="form-control"
                     />
                   </div>

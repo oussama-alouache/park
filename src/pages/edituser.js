@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Message,  Notification ,toaster } from 'rsuite';
 
 
 class Edituser extends Component{
 
+  
+
     state = {
         username: "",
-        passw: "",
+        passew: "",
         mail: "",
         date: "",
       };
@@ -25,7 +28,7 @@ class Edituser extends Component{
                 {
                  this.setState({
                     username: res.data.student.username,
-                    passw: res.data.student.passw,
+                    passew: res.data.student.passew,
                     mail: res.data.student.mail,
                     date:res.data.student.date,
                   });
@@ -34,25 +37,29 @@ class Edituser extends Component{
 
       updateuser = async (e) => {
         e.preventDefault();
-    
-      const res = await axios.post(
-         "http://127.0.0.1:8000/api/add-user",
+        const student_id = this.props.match.params.id;
+     
+
+      const res = await axios.put(
+        `http://127.0.0.1:8000/api/update-user/${student_id}`,
          this.state
        );
        if (res.data.status === 200) {
           console.log(res.data.message);
     
          this.setState({
-            username: "",
-           passw: "",
-            mail: "",
-            date: "",
+            
           });
         }
      };
     
       render() {
+        const message = (
+          <Notification type='warning' header='user upated' closable>
+          
+        </Notification>)
         return (
+          
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -88,7 +95,7 @@ class Edituser extends Component{
                           type="text"
                           name="passew"
                           onChange={this.handleInput}
-                          value={this.state.passw}
+                          value={this.state.passew}
                           className="form-control"
                         />
                       </div>
@@ -113,7 +120,7 @@ class Edituser extends Component{
                         />
                       </div>
                       <div className="form-group mb-3">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" onClick={() => toaster.push(<Notification> {message}  </Notification>    , {placement:'topEnd'})} className="btn btn-primary">
                           save
                         </button>
                       </div>
